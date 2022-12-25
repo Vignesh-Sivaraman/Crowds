@@ -1,4 +1,4 @@
-import { Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -7,6 +7,24 @@ export const NavMain = styled(Navbar)`
   top: 0;
   width: 100%;
   z-index: 999;
+  background-color: ${(props) => props.theme.bg} !important;
+  color: ${(props) => props.theme.textColor} !important;
+  border-bottom: 1px solid ${(props) => props.theme.border};
+`;
+
+export const NavBox = styled(Nav)`
+  display: flex;
+  justify-content: space-between !important;
+  margin: 0 !important;
+  width: 100%;
+`;
+
+export const NavContentContainer = styled.div`
+  display: flex;
+  @media (max-width: 768px) {
+    gap: 15px;
+    margin-top: 10px;
+  }
 `;
 
 export const NavLogo = styled.img`
@@ -29,24 +47,16 @@ export const NavUserLogo = styled.img`
 `;
 
 export const NavTitle = styled(Navbar.Brand)`
+  cursor: default;
   font-weight: bold;
-  background-image: linear-gradient(
-    to right bottom,
-    #4392d8,
-    #387ebd,
-    #2e6ba2,
-    #235989,
-    #194770,
-    #1e4a72,
-    #224c75,
-    #264f77,
-    #396895,
-    #4c81b5,
-    #609cd5,
-    #73b8f6
-  );
+  background-image: ${(props) => props.theme.bgImage};
   -webkit-background-clip: text;
   color: transparent;
+  &:hover {
+    background-image: ${(props) => props.theme.bgImage};
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 `;
 
 export const NavUserContainer = styled.div`
@@ -55,17 +65,34 @@ export const NavUserContainer = styled.div`
 
 export const NavLinks = styled(Link)`
   text-decoration: none;
+  display: flex;
+  align-items: center;
 
   span {
-    color: #214c75;
+    background-image: ${(props) => props.theme.bgImage};
+    -webkit-background-clip: text;
+    color: transparent;
     font-weight: bold;
+    padding-left: 3px !important;
+    &:hover {
+      background-image: ${(props) => props.theme.bgImage};
+      -webkit-background-clip: text;
+      color: transparent;
+    }
   }
 `;
 
 export const NavUserTitle = styled.span`
-  color: #453c67 !important;
+  background-image: ${(props) => props.theme.bgImage};
+  -webkit-background-clip: text;
+  color: transparent;
   font-weight: bold;
   font-style: oblique;
+  &:hover {
+    background-image: ${(props) => props.theme.bgImage};
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 `;
 
 export const NavLogout = styled(Link)`
@@ -73,26 +100,12 @@ export const NavLogout = styled(Link)`
   span {
     font-weight: bold;
     cursor: pointer;
-    background-image: linear-gradient(
-      to left bottom,
-      #51c8fe,
-      #42b4eb,
-      #32a1d7,
-      #208ec4,
-      #057bb1
-    );
+    background-image: ${(props) => props.theme.bgImage};
     -webkit-background-clip: text;
     color: transparent;
 
     &:hover {
-      background-image: linear-gradient(
-        to left bottom,
-        #51c8fe,
-        #42b4eb,
-        #32a1d7,
-        #208ec4,
-        #057bb1
-      );
+      background-image: ${(props) => props.theme.bgImage};
       -webkit-background-clip: text;
       color: transparent;
       transform: scale(1.1);

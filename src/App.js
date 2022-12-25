@@ -5,17 +5,26 @@ import Home from "./routes/Home/Home";
 import LoginPage from "./routes/LoginPage/LoginPage";
 import Profile from "./routes/Profile/Profile";
 import RegisterPage from "./routes/RegisterPage/RegisterPage";
+import { ThemeProvider } from "styled-components";
+import { useContext } from "react";
+import { ThemeContext } from "./context/ThemeContext";
+import { Dark, Light } from "./Themes";
+import Activities from "./routes/Activities/Activities";
 
 function App() {
+  const { theme } = useContext(ThemeContext);
   return (
-    <Routes>
-      <Route path="/" element={<Home />}>
-        <Route index element={<PostFeeds />} />
-        <Route path="login" element={<LoginPage />}></Route>
-        <Route path="register" element={<RegisterPage />}></Route>
-        <Route path="profile" element={<Profile />}></Route>
-      </Route>
-    </Routes>
+    <ThemeProvider theme={theme ? Light : Dark}>
+      <Routes>
+        <Route path="/" element={<LoginPage />}></Route>
+        <Route path="/register" element={<RegisterPage />}></Route>
+        <Route path="/home" element={<Home />}>
+          <Route index element={<PostFeeds />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="activities" element={<Activities />} />
+        </Route>
+      </Routes>
+    </ThemeProvider>
   );
 }
 

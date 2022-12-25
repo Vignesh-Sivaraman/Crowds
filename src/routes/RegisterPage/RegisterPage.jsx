@@ -1,10 +1,7 @@
 import Lottie from "lottie-react";
 import welcomeAnimation from "../../assets/animations/87300-redes-sociales-publico.json";
-import { env } from "../../config/config.js";
 import animationLogo from "../../assets/images/logo.jpg";
-
 import { useFormik } from "formik";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -20,6 +17,7 @@ import {
   OnboardingButton,
   OnboardingDirectionText,
 } from "../LoginPage/LoginPage.styles";
+import { crowdServer } from "../../config/axios";
 
 const animationStyle = {
   height: "100%",
@@ -28,8 +26,8 @@ const animationStyle = {
 const RegisterPage = () => {
   const navigate = useNavigate();
 
-  const moveToLogin = () => {
-    navigate("/login");
+  const moveTopage = (url) => {
+    navigate(url);
   };
 
   let formik = useFormik({
@@ -37,16 +35,13 @@ const RegisterPage = () => {
       name: "",
       email: "",
       password: "",
+      city: "",
     },
     onSubmit: async (values) => {
       try {
-        let user = await axios.post(`${env.api}/users/register`, values, {
-          headers: {
-            Authorization: window.localStorage.getItem("app-token"),
-          },
-        });
+        let user = await crowdServer.post("auth/register", values);
         if (user.status === 200) {
-          console.log("Logged in Successfully");
+          moveTopage("/");
         }
       } catch (err) {
         alert(err.response.data.message);
@@ -65,7 +60,7 @@ const RegisterPage = () => {
           />
           <OnboardingDirectionText>
             <span>Already a member? </span>
-            <b onClick={moveToLogin}>Login here!</b>
+            <b onClick={() => moveTopage("/")}>Login here!</b>
           </OnboardingDirectionText>
         </OnboardingLeftContainer>
         <OnboardingSeperator />
@@ -109,6 +104,19 @@ const RegisterPage = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
+                required
+              />
+            </OnboardingInputBox>
+            <OnboardingLabel>
+              <span>City</span>
+            </OnboardingLabel>
+            <OnboardingInputBox>
+              <input
+                type="text"
+                name="city"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.city}
                 required
               />
             </OnboardingInputBox>

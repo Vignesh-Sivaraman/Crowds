@@ -5,8 +5,8 @@ export const NewPostMain = styled.div`
   -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   border-radius: 20px;
-  background-color: white;
-  color: #000;
+  background-color: ${(props) => props.theme.bg};
+  color: ${(props) => props.theme.textColor};
   width: 75%;
   @media (max-width: 768px) {
     width: 95%;
@@ -66,9 +66,19 @@ export const NewPostItem = styled.div`
     height: 20px;
   }
 
+  input {
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    background-color: transparent;
+    width: 100%;
+    color: themed("textColor");
+  }
+
   span {
     font-size: 12px;
     color: gray;
+    width: 150px;
     @media (max-width: 480px) {
       font-size: 10px;
     }

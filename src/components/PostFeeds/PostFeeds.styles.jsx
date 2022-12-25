@@ -6,4 +6,5 @@ export const PostFeedsMain = styled.div`
   gap: 50px;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `;

@@ -4,23 +4,12 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
-    {
-      id: 1,
-      name: "John Doe",
-      profilePic:
-        "https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    } || null
+    JSON.parse(localStorage.getItem("user")) || null
   );
 
-  //   const login = () => {
-  //     //TO DO
-  //     setCurrentUser({
-  //       id: 1,
-  //       name: "John Doe",
-  //       profilePic:
-  //         "https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  //     });
-  //   };
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(currentUser));
+  }, [currentUser]);
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>

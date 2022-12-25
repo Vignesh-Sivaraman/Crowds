@@ -31,10 +31,10 @@ const PostFeed = ({ post }) => {
       <PostFeedContainer>
         <PostFeedUser>
           <PostFeedUserInfo>
-            <img src={post.profilePic} alt="post.name" />
+            <img src={post.profilePic} alt={post.userName} />
             <PostFeedDetails>
               <PostFeedLink to={`/profile/${post.userId}`}>
-                <PostFeedName>{post.name}</PostFeedName>
+                <PostFeedName>{post.userName}</PostFeedName>
               </PostFeedLink>
               <PostFeedDate>1 min ago</PostFeedDate>
             </PostFeedDetails>
@@ -42,8 +42,8 @@ const PostFeed = ({ post }) => {
           <MoreHorizIcon />
         </PostFeedUser>
         <PostFeedContent>
-          <p>{post.desc}</p>
-          <img src={post.img} alt="" />
+          <p>{post.postDesc}</p>
+          <img src={post.postImg} alt="" />
         </PostFeedContent>
         <PostFeedInfo>
           <PostFeedItem>
@@ -59,7 +59,7 @@ const PostFeed = ({ post }) => {
             Share
           </PostFeedItem>
         </PostFeedInfo>
-        {commentOpen && <Comments />}
+        {commentOpen && <Comments postId={post.idposts} />}
       </PostFeedContainer>
     </PostFeedMain>
   );

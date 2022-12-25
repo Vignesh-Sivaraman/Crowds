@@ -6,8 +6,8 @@ export const PostFeedMain = styled.div`
   -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   border-radius: 20px;
-  background-color: white;
-  color: #000;
+  background-color: ${(props) => props.theme.bg};
+  color: ${(props) => props.theme.textColor};
   width: 75%;
   @media (max-width: 768px) {
     width: 95%;

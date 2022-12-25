@@ -1,10 +1,7 @@
 import Lottie from "lottie-react";
 import welcomeAnimation from "../../assets/animations/72342-welcome.json";
-import { env } from "../../config/config.js";
 import animationLogo from "../../assets/images/logo.jpg";
-
 import { useFormik } from "formik";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -20,6 +17,9 @@ import {
   OnboardingButton,
   OnboardingDirectionText,
 } from "./LoginPage.styles";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
+import { crowdServer } from "../../config/axios";
 
 const animationStyle = {
   height: "100%",
@@ -27,9 +27,10 @@ const animationStyle = {
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { setCurrentUser } = useContext(UserContext);
 
-  const moveToRegister = () => {
-    navigate("/register");
+  const moveTopage = (url) => {
+    navigate(url);
   };
   let formik = useFormik({
     initialValues: {
@@ -39,13 +40,10 @@ const LoginPage = () => {
     },
     onSubmit: async (values) => {
       try {
-        let user = await axios.post(`${env.api}/users/register`, values, {
-          headers: {
-            Authorization: window.localStorage.getItem("app-token"),
-          },
-        });
+        let user = await crowdServer.post("auth/login", values);
         if (user.status === 200) {
-          console.log("Logged in Successfully");
+          setCurrentUser(user.data);
+          moveTopage("/home");
         }
       } catch (err) {
         alert(err.response.data.message);
@@ -64,7 +62,7 @@ const LoginPage = () => {
           />
           <OnboardingDirectionText>
             <span>New to the community? </span>
-            <b onClick={moveToRegister}>Register here!</b>
+            <b onClick={() => moveTopage("/register")}>Register here!</b>
           </OnboardingDirectionText>
         </OnboardingLeftContainer>
         <OnboardingSeperator />
