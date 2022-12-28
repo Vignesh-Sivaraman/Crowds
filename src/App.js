@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { ThemeContext } from "./context/ThemeContext";
 import { Dark, Light } from "./Themes";
 import Activities from "./routes/Activities/Activities";
+import Chat from "./routes/Chat/Chat";
 
 function App() {
   const { theme } = useContext(ThemeContext);
@@ -20,8 +21,9 @@ function App() {
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/home" element={<Home />}>
           <Route index element={<PostFeeds />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile/:Id" element={<Profile />} />
           <Route path="activities" element={<Activities />} />
+          <Route path="chat" element={<Chat />} />
         </Route>
       </Routes>
     </ThemeProvider>

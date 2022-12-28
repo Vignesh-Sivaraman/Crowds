@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import welcomeAnimation from "../../assets/animations/72342-welcome.json";
-import animationLogo from "../../assets/images/logo.jpg";
+import animationLogo from "../../assets/images/logo.png";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 

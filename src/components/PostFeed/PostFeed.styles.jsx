@@ -9,6 +9,7 @@ export const PostFeedMain = styled.div`
   background-color: ${(props) => props.theme.bg};
   color: ${(props) => props.theme.textColor};
   width: 75%;
+  margin-bottom: 20px;
   @media (max-width: 768px) {
     width: 95%;
   }
@@ -55,13 +56,13 @@ export const PostFeedDate = styled.span`
 
 export const PostFeedContent = styled.div`
   margin: 20px 0px;
+`;
 
-  img {
-    width: 100%;
-    max-height: 500px;
-    object-fit: cover;
-    margin-top: 20px;
-  }
+export const PostImage = styled.img`
+  width: 100%;
+  max-height: 500px;
+  margin-top: 20px;
+  object-fit: cover;
 `;
 
 export const PostFeedInfo = styled.div`

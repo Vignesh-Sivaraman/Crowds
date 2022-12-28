@@ -4,7 +4,7 @@ export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(
-    JSON.parse(localStorage.getItem("theme")) || false
+    JSON.parse(sessionStorage.getItem("theme")) || false
   );
 
   const toggle = () => {
@@ -12,7 +12,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
+    sessionStorage.setItem("theme", theme);
   }, [theme]);
 
   return (

@@ -10,42 +10,144 @@ import {
   ProfileUserItem,
 } from "./Profile.styles";
 import PlaceIcon from "@mui/icons-material/Place";
-import LanguageIcon from "@mui/icons-material/Language";
-import PostFeeds from "../../components/PostFeeds/PostFeeds";
+import PersonIcon from "@mui/icons-material/Person";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { crowdServer } from "../../config/axios";
+import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../context/userContext";
+import Updateuser from "../../components/Updateuser/Updateuser";
 
 const Profile = () => {
+  const [openUpdate, setOpenUpdate] = useState(false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  let params = useParams();
+
+  const userId = parseInt(params.Id);
+
+  const { currentUser } = useContext(UserContext);
+
+  const { isLoading, error, data } = useQuery(["user"], async () => {
+    let res = await crowdServer.post(
+      "/users/getuser",
+      {
+        userId,
+      },
+      {
+        headers: {
+          authorization: currentUser.token,
+        },
+      }
+    );
+    return res.data;
+  });
+
+  const { isLoading: rIsLoading, data: relationshipData } = useQuery(
+    ["relations"],
+    async (req, res) => {
+      let userData = await crowdServer.post(
+        "/users/getrelation",
+        { followedId: params.Id },
+        {
+          headers: {
+            authorization: currentUser.token,
+          },
+        }
+      );
+      return userData.data;
+    }
+  );
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (following) => {
+      if (following)
+        return crowdServer.post(
+          "/users/deleterelation",
+          {
+            followerId: currentUser.details.idusers,
+            followedId: userId,
+          },
+          {
+            headers: {
+              authorization: currentUser.token,
+            },
+          }
+        );
+
+      return crowdServer.post(
+        "/users/addrelation",
+        {
+          followerId: currentUser.details.idusers,
+          followedId: userId,
+        },
+        {
+          headers: {
+            authorization: currentUser.token,
+          },
+        }
+      );
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["relations"]);
+      },
+    }
+  );
+
+  const handleFollow = () => {
+    mutation.mutate(relationshipData.includes(currentUser.details.idusers));
+  };
+
   return (
-    <ProfileMain>
-      <ProfileImages>
-        <ProfileCover
-          src="https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt="cover"
-        />
-        <ProfilePic
-          src="https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-          alt="ProfilePic"
-        />
-      </ProfileImages>
-      <ProfileContainer>
-        <ProfileUserInfo>
-          <ProfileUserCenter>
-            <span>Jane Doe</span>
-            <ProfileInfo>
-              <ProfileUserItem>
-                <PlaceIcon />
-                <span>USA</span>
-              </ProfileUserItem>
-              <ProfileUserItem>
-                <LanguageIcon />
-                <span>lama.dev</span>
-              </ProfileUserItem>
-            </ProfileInfo>
-            <button>follow</button>
-          </ProfileUserCenter>
-        </ProfileUserInfo>
-        <PostFeeds />
-      </ProfileContainer>
-    </ProfileMain>
+    data &&
+    relationshipData &&
+    (isLoading ? (
+      "loading"
+    ) : (
+      <ProfileMain>
+        <ProfileImages>
+          <ProfileCover src={data.coverPic} alt="cover" />
+          <ProfilePic src={data.profilePic} alt="ProfilePic" />
+        </ProfileImages>
+        <ProfileContainer>
+          <ProfileUserInfo>
+            <ProfileUserCenter>
+              <ProfileInfo>
+                <ProfileUserItem>
+                  <PersonIcon />
+                  <span>{data.userName}</span>
+                </ProfileUserItem>
+                <ProfileUserItem>
+                  <PlaceIcon />
+                  <span>{data.city}</span>
+                </ProfileUserItem>
+              </ProfileInfo>
+              {currentUser.details.idusers === userId ? (
+                <button
+                  style={{ backgroundColor: "orange", color: "black" }}
+                  onClick={() => setOpenUpdate(true)}
+                >
+                  update
+                </button>
+              ) : (
+                <button onClick={handleFollow}>
+                  {relationshipData.includes(currentUser.details.idusers)
+                    ? "following"
+                    : "follow"}
+                </button>
+              )}
+            </ProfileUserCenter>
+          </ProfileUserInfo>
+          <Updateuser setOpenUpdate={setOpenUpdate} />
+        </ProfileContainer>
+      </ProfileMain>
+    ))
   );
 };
 

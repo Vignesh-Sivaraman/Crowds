@@ -1,8 +1,8 @@
 export const Light = {
   textColor: "#000",
-  bg: "white",
+  bg: "#f6f3f3",
   logo: "darkblue",
-  bgSoft: "#f6f3f3",
+  bgSoft: `linear-gradient(to right, #e0eafc, #cfdef3)`,
   textColorSoft: "#555",
   border: "lightgray",
   bgImage: ` linear-gradient(
@@ -26,7 +26,7 @@ export const Dark = {
   textColor: "whitesmoke",
   bg: "#222",
   logo: "white",
-  bgSoft: "#333",
+  bgSoft: `linear-gradient(to right, #232526, #414345)`,
   textColorSoft: "lightgray",
   border: "#444",
   bgImage: `linear-gradient(

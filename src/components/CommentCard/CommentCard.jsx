@@ -4,16 +4,21 @@ import {
   CommentCardDate,
 } from "./CommentCard.styles";
 
+import moment from "moment";
+import { Fragment } from "react";
+
 const CommentCard = ({ comment }) => {
   return (
-    <CommentCardMain>
-      <img src={comment.profilePicture} alt="" />
-      <CommentCardInfo>
-        <span>{comment.name}</span>
-        <p>{comment.desc}</p>
-      </CommentCardInfo>
-      <CommentCardDate>1 hour ago</CommentCardDate>
-    </CommentCardMain>
+    <Fragment>
+      <CommentCardMain>
+        <img src={comment.profilePic} alt="" />
+        <CommentCardInfo>
+          <span>{comment.userName}</span>
+          <p>{comment.commentDesc}</p>
+        </CommentCardInfo>
+        <CommentCardDate>{moment(comment.createdAt).fromNow()}</CommentCardDate>
+      </CommentCardMain>
+    </Fragment>
   );
 };
 

@@ -28,11 +28,11 @@ export const NavContentContainer = styled.div`
 `;
 
 export const NavLogo = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  /* border-radius: 50%; */
   margin-right: 2rem;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 export const NavUserLogo = styled.img`
@@ -40,7 +40,7 @@ export const NavUserLogo = styled.img`
   height: 35px;
   border-radius: 50%;
   margin: 0rem 0rem 0rem 1rem;
-  object-fit: cover;
+  object-fit: contain;
   @media (max-width: 768px) {
     margin: 0rem 1rem 0rem 0rem;
   }

@@ -1,5 +1,5 @@
 import Image from "../../assets/images/image.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext.js";
 import { useFormik } from "formik";
 import {
@@ -15,6 +15,10 @@ import { crowdServer } from "../../config/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NewPost = () => {
+  useEffect(() => {
+    console.log("scrolled home");
+    window.scrollTo(0, 0);
+  }, []);
   const { currentUser } = useContext(UserContext);
   const queryClient = useQueryClient();
 
@@ -42,6 +46,10 @@ const NewPost = () => {
     },
     onSubmit: async (values, { resetForm }) => {
       try {
+        values.postImg =
+          values.postImg === ""
+            ? "https://images.unsplash.com/photo-1512314889357-e157c22f938d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
+            : values.postImg;
         mutation.mutate(values);
         resetForm();
       } catch (err) {
@@ -55,7 +63,7 @@ const NewPost = () => {
       <NewPostContainer>
         <form onSubmit={formik.handleSubmit}>
           <NewPostTop>
-            <img src={currentUser.profilePic} alt="" />
+            <img src={currentUser.details.profilePic} alt="" />
             <input
               type="text"
               name="postDesc"
@@ -74,7 +82,7 @@ const NewPost = () => {
                 <input
                   type="text"
                   name="postImg"
-                  placeholder={`Add Image URL (if any)`}
+                  placeholder={`Add Image URL (If any)`}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.postImg}

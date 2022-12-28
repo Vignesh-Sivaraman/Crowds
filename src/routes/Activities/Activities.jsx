@@ -1,6 +1,8 @@
-import React, { Fragment } from "react";
+import { useEffect } from "react";
 import LatestActivities from "../../components/LatestActivities/LatestActivities";
 import SuggestionsCard from "../../components/SuggestionsCard/SuggestionsCard";
+
+import { ActivitiesMain, Activitiesbox } from "./Activities.styles";
 
 const userData = [
   {
@@ -26,15 +28,22 @@ const userData = [
 ];
 
 const Activities = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-    <Fragment>
-      {userData.map((usersData, i) => {
-        return <LatestActivities usersData={usersData} key={i + 1} />;
-      })}
-      {userData.map((usersData, i) => {
-        return <SuggestionsCard usersData={usersData} key={i + 1} />;
-      })}
-    </Fragment>
+    <ActivitiesMain>
+      <Activitiesbox>
+        {userData.map((usersData, i) => {
+          return <LatestActivities usersData={usersData} key={i + 1} />;
+        })}
+      </Activitiesbox>
+      <Activitiesbox>
+        {userData.map((usersData, i) => {
+          return <SuggestionsCard usersData={usersData} key={i + 1} />;
+        })}
+      </Activitiesbox>
+    </ActivitiesMain>
   );
 };
 

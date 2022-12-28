@@ -76,6 +76,7 @@ export const ProfileUserCenter = styled.div`
     font-weight: 500;
   }
   button {
+    margin-top: 20px;
     border: none;
     background-color: #5271ff;
     color: white;

@@ -12,7 +12,7 @@ import {
 } from "./NavbarContainer.styles";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import animationLogo from "../../assets/images/logo.jpg";
+import animationLogo from "../../assets/images/logo.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -55,7 +55,7 @@ const NavbarContainer = () => {
             </NavContentContainer>
             <NavContentContainer>
               <NavUserContainer>
-                <NavLinks to="/home/profile">
+                <NavLinks to={`profile/${currentUser.details.idusers}`}>
                   <NavUserLogo src={animationLogo} alt="userlogo" />
                   <NavUserTitle className="nav-link">
                     {currentUser.details.userName}
