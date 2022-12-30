@@ -26,8 +26,7 @@ export const ChatContainer = styled.div`
   color: ${(props) => props.theme.textColor};
   border-radius: 1rem;
   padding: 1rem;
-  height: auto;
-  min-height: 80vh;
+  height: 80vh;
 `;
 
 export const ChatList = styled.div`
@@ -37,7 +36,10 @@ export const ChatList = styled.div`
 `;
 
 export const ChatRight = styled.div`
+  background-color: ${(props) => props.theme.bg};
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 60%;
+  border-radius: 1rem;
 `;

@@ -15,6 +15,10 @@ export const ConversationMain = styled.div`
   }
 `;
 
+export const ConversationLeft = styled.div`
+  width: 50%;
+`;
+
 export const ConversationName = styled.div`
   padding-left: 10px;
   font-size: 0.8rem;
@@ -26,11 +30,11 @@ export const ConversationName = styled.div`
 `;
 
 export const ConversationOnlineDot = styled.div`
-  background-color: greenyellow;
+  background-color: #54b435;
   border-radius: 50%;
   position: relative;
   left: 3rem;
-  bottom: 1rem;
+  bottom: 1.25rem;
   width: 1rem;
   height: 1rem;
 `;
@@ -40,4 +44,13 @@ export const ConversationFollowImage = styled.img`
   height: 50px;
   border-radius: 50%;
   object-fit: contain;
+`;
+
+export const ConversationRight = styled.div`
+  background-color: ${(props) => props.theme.bg};
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 60%;
+  border-radius: 1rem;
 `;

@@ -12,5 +12,5 @@ export const ChildContainer = styled.div`
   z-index: 10;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 35px;
 `;
