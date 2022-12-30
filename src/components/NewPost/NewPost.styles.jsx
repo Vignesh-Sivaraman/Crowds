@@ -40,7 +40,7 @@ export const NewPostTop = styled.div`
     padding: 20px 10px;
     background-color: transparent;
     width: 60%;
-    color: themed("textColor");
+    color: ${(props) => props.theme.textColor};
   }
 `;
 

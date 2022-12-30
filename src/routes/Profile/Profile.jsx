@@ -144,7 +144,7 @@ const Profile = () => {
               )}
             </ProfileUserCenter>
           </ProfileUserInfo>
-          <Updateuser setOpenUpdate={setOpenUpdate} />
+          {openUpdate ? <Updateuser setOpenUpdate={setOpenUpdate} /> : ""}
         </ProfileContainer>
       </ProfileMain>
     ))

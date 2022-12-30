@@ -9,7 +9,7 @@ import {
   ConversationOnlineDot,
 } from "./Conversation.styles";
 
-const Conversation = ({ friendsdata }) => {
+const Conversation = ({ friendsdata, online }) => {
   const { currentUser } = useContext(UserContext);
   const [userData, setUserData] = useState(null);
   // const [currentChat, setCurrentChat] = useState(null);
@@ -37,8 +37,6 @@ const Conversation = ({ friendsdata }) => {
   useEffect(() => {
     getfriendsData();
   }, []);
-
-  let online = true;
 
   return (
     userData && (

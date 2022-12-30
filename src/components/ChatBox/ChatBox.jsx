@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import moment from "moment";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { crowdServer } from "../../config/axios";
 import { UserContext } from "../../context/userContext";
 import {
@@ -20,6 +20,7 @@ import {
 const ChatBox = ({ chat, setSendMessage, receivedMessage }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
+  const scroll = useRef();
 
   const { currentUser } = useContext(UserContext);
 
@@ -112,6 +113,12 @@ const ChatBox = ({ chat, setSendMessage, receivedMessage }) => {
     }
   }, [receivedMessage]);
 
+  // scroll to last
+
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
+
   return (
     <ChatBoxMain>
       {chat !== null ? (
@@ -142,12 +149,12 @@ const ChatBox = ({ chat, setSendMessage, receivedMessage }) => {
                 messages.map((message) =>
                   message.senderId ===
                   currentUser.details.idusers.toString() ? (
-                    <ChatBoxmessageOwn>
+                    <ChatBoxmessageOwn ref={scroll}>
                       <span>{message.text}</span>
                       <span>{moment(message.createdAt).fromNow()}</span>
                     </ChatBoxmessageOwn>
                   ) : (
-                    <ChatBoxmessage>
+                    <ChatBoxmessage ref={scroll}>
                       <span>{message.text}</span>
                       <span>{moment(message.createdAt).fromNow()}</span>
                     </ChatBoxmessage>
