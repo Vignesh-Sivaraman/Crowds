@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import PostFeeds from "./components/PostFeeds/PostFeeds";
 import Home from "./routes/Home/Home";
 import LoginPage from "./routes/LoginPage/LoginPage";

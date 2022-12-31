@@ -28,7 +28,7 @@ const Profile = () => {
 
   const userId = parseInt(params.Id);
 
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const { isLoading, error, data } = useQuery(["user"], async () => {
     let res = await crowdServer.post(
@@ -131,7 +131,7 @@ const Profile = () => {
               {currentUser.details.idusers === userId ? (
                 <button
                   style={{ backgroundColor: "orange", color: "black" }}
-                  onClick={() => setOpenUpdate(true)}
+                  onClick={() => setOpenUpdate(!openUpdate)}
                 >
                   update
                 </button>

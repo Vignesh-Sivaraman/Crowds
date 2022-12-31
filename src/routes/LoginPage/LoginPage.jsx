@@ -43,6 +43,7 @@ const LoginPage = () => {
         let user = await crowdServer.post("auth/login", values);
         if (user.status === 200) {
           setCurrentUser(user.data);
+          sessionStorage.setItem("user", JSON.stringify(user.data));
           moveTopage("/home");
         }
       } catch (err) {

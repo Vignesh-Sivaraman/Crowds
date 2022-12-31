@@ -146,15 +146,15 @@ const ChatBox = ({ chat, setSendMessage, receivedMessage }) => {
             </ChatBoxHeader>
             <ChatBoxBody>
               {messages &&
-                messages.map((message) =>
+                messages.map((message, i) =>
                   message.senderId ===
                   currentUser.details.idusers.toString() ? (
-                    <ChatBoxmessageOwn ref={scroll}>
+                    <ChatBoxmessageOwn ref={scroll} key={i + 1}>
                       <span>{message.text}</span>
                       <span>{moment(message.createdAt).fromNow()}</span>
                     </ChatBoxmessageOwn>
                   ) : (
-                    <ChatBoxmessage ref={scroll}>
+                    <ChatBoxmessage ref={scroll} key={i + 1}>
                       <span>{message.text}</span>
                       <span>{moment(message.createdAt).fromNow()}</span>
                     </ChatBoxmessage>

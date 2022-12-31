@@ -95,7 +95,7 @@ export const NavUserTitle = styled.span`
   }
 `;
 
-export const NavLogout = styled(Link)`
+export const NavLogout = styled.span`
   text-decoration: none;
   span {
     font-weight: bold;

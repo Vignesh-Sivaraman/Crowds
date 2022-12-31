@@ -13,19 +13,21 @@ import {
 
 const Updateuser = ({ setOpenUpdate }) => {
   const queryClient = useQueryClient();
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const mutation = useMutation(
-    (updatedValues) => {
-      return crowdServer.post("/users/updateuser", updatedValues, {
+    async (updatedValues) => {
+      const res = await crowdServer.post("/users/updateuser", updatedValues, {
         headers: {
           authorization: currentUser.token,
         },
       });
+      return res.data;
     },
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
         // Invalidate and refetch
+        setCurrentUser({ ...currentUser, details: data });
         queryClient.invalidateQueries(["user"]);
       },
     }

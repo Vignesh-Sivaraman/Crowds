@@ -40,7 +40,7 @@ export const SuggestionsCardButtons = styled.div`
     }
 
     &:last-child {
-      background-color: #f0544f;
+      background-color: #5271ff;
     }
   }
 `;

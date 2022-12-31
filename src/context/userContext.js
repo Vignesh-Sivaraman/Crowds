@@ -7,10 +7,6 @@ export const UserProvider = ({ children }) => {
     JSON.parse(sessionStorage.getItem("user")) || null
   );
 
-  useEffect(() => {
-    sessionStorage.setItem("user", JSON.stringify(currentUser));
-  }, [currentUser]);
-
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       {children}

@@ -20,9 +20,17 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { UserContext } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 const NavbarContainer = () => {
   const { theme, toggle } = useContext(ThemeContext);
   const { currentUser } = useContext(UserContext);
+  let navigate = useNavigate();
+
+  const logoutUser = () => {
+    window.sessionStorage.clear();
+    navigate("/");
+  };
+
   return (
     <NavMain bg="white" expand="lg">
       <Container fluid>
@@ -63,7 +71,9 @@ const NavbarContainer = () => {
                 </NavLinks>
               </NavUserContainer>
               <NavLogout>
-                <span className="nav-link">Logout</span>
+                <span className="nav-link" onClick={logoutUser}>
+                  Logout
+                </span>
               </NavLogout>{" "}
             </NavContentContainer>
           </NavBox>
