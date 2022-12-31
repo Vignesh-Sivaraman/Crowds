@@ -1,5 +1,5 @@
 export const env = {
-  api: "http://localhost:3005",
+  api: "https://crowds-server.vercel.app",
 };
 //
 // http://localhost:3005

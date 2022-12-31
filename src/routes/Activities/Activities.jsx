@@ -7,29 +7,6 @@ import { UserContext } from "../../context/userContext";
 
 import { ActivitiesMain, Activitiesbox } from "./Activities.styles";
 
-const userData = [
-  {
-    URL: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    userName: "Jane Doe",
-  },
-  {
-    URL: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    userName: "Jane Doe",
-  },
-  {
-    URL: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    userName: "Jane Doe",
-  },
-  {
-    URL: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    userName: "Jane Doe",
-  },
-  {
-    URL: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    userName: "Jane Doe",
-  },
-];
-
 const Activities = () => {
   const { currentUser } = useContext(UserContext);
   let [suggestionData, setSuggestionData] = useState([]);
