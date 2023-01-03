@@ -50,7 +50,10 @@ const Chat = () => {
   useEffect(() => {
     if (currentUser.details.idusers) {
       socket.current = io("https://crowds.onrender.com");
-      socket.current.emit("new-user-add", currentUser.details.idusers);
+      socket.current.emit(
+        "new-user-add",
+        currentUser.details.idusers.toString()
+      );
       socket.current.on("get-users", (users) => {
         // OnlineUsers.current = users;
         setOnlineUsers(users);
