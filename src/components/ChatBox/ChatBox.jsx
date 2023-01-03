@@ -84,7 +84,7 @@ const ChatBox = ({ chat, setSendMessage, receivedMessage }) => {
     },
 
     onSubmit: async (values, { resetForm }) => {
-      values.senderId = currentUser.details.idusers;
+      values.senderId = currentUser.details.idusers.toString();
       values.chatId = chat._id;
       const receiverId = chat.members.find(
         (id) => id !== currentUser.details.idusers.toString()
