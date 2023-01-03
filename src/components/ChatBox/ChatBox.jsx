@@ -107,7 +107,6 @@ const ChatBox = ({ chat, setSendMessage, receivedMessage }) => {
   //getting msg from socket server
 
   useEffect(() => {
-    console.log(receivedMessage);
     if (receivedMessage !== null && receivedMessage.chatId === chat._id) {
       setMessages([...messages, receivedMessage]);
     }

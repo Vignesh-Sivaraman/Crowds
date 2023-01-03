@@ -49,7 +49,6 @@ const Chat = () => {
   // connecting to socket server
   useEffect(() => {
     if (currentUser.details.idusers) {
-      console.log("I am running");
       socket = io("https://crowds.onrender.com/");
       socket.emit("new-user-add", currentUser.details.idusers);
       socket.on("get-users", (users) => {
@@ -62,7 +61,6 @@ const Chat = () => {
   // setting send messagefrom socket server
   useEffect(() => {
     if (sendMessage !== null) {
-      console.log("message delivered");
       socket.emit("send-message", sendMessage);
     }
   }, [sendMessage]);
@@ -70,7 +68,6 @@ const Chat = () => {
   //receive msg from socket server
 
   useEffect(() => {
-    console.log("receiving message");
     socket.on("receive-message", (data) => {
       setReceivedMessage(data);
     });

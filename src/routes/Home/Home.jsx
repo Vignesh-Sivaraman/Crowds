@@ -9,9 +9,7 @@ const Home = () => {
   const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
-    console.log("i am firing");
     if (currentUser === null) {
-      console.log(currentUser);
       navigate("/");
     }
   }, [navigate]);

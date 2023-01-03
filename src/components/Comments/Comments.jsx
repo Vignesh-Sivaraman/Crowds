@@ -12,7 +12,6 @@ const Comments = ({ postId }) => {
   const { isLoading, error, data } = useQuery(
     ["comments" + postId],
     async () => {
-      console.log("getting");
       let res = await crowdServer.post(
         "/comments/getcomment",
         { commentPostId: postId },

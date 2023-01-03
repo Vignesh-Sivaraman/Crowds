@@ -16,7 +16,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NewPost = () => {
   useEffect(() => {
-    console.log("scrolled home");
     window.scrollTo(0, 0);
   }, []);
   const { currentUser } = useContext(UserContext);
