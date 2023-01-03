@@ -22,7 +22,7 @@ const Chat = () => {
   const [receivedMessage, setReceivedMessage] = useState(null);
   // const OnlineUsers = useRef([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
-  var socket = io("ws://crowds.onrender.com");
+  var socket = io("https://crowds.onrender.com");
 
   // getting userchat
   const getuserChats = async (req, res) => {
