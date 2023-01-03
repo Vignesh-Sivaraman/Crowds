@@ -60,6 +60,7 @@ const Chat = () => {
 
   // setting send messagefrom socket server
   useEffect(() => {
+    socket = io("https://crowds.onrender.com/");
     if (sendMessage !== null) {
       socket.emit("send-message", sendMessage);
     }
