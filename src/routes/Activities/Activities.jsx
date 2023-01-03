@@ -23,6 +23,7 @@ const Activities = () => {
       }
     );
     setSuggestionData(result.data);
+    // return "data received";
   });
 
   useEffect(() => {

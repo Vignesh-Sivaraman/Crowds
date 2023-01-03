@@ -67,7 +67,7 @@ export const NavLinks = styled(Link)`
   text-decoration: none;
   display: flex;
   align-items: center;
-
+  padding: 0px 10px;
   span {
     background-image: ${(props) => props.theme.bgImage};
     -webkit-background-clip: text;

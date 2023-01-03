@@ -63,9 +63,40 @@ const Profile = () => {
 
   const queryClient = useQueryClient();
 
+  const deleteChat = async () => {
+    await crowdServer.post(
+      "/chat/deletechat",
+      {
+        firstId: currentUser.details.idusers.toString(),
+        secondId: userId.toString(),
+      },
+      {
+        headers: {
+          authorization: currentUser.token,
+        },
+      }
+    );
+  };
+
+  const addChat = async () => {
+    await crowdServer.post(
+      "/chat/createchat",
+      {
+        senderId: currentUser.details.idusers.toString(),
+        receiverId: userId.toString(),
+      },
+      {
+        headers: {
+          authorization: currentUser.token,
+        },
+      }
+    );
+  };
+
   const mutation = useMutation(
     (following) => {
-      if (following)
+      if (following) {
+        deleteChat();
         return crowdServer.post(
           "/users/deleterelation",
           {
@@ -78,7 +109,8 @@ const Profile = () => {
             },
           }
         );
-
+      }
+      addChat();
       return crowdServer.post(
         "/users/addrelation",
         {

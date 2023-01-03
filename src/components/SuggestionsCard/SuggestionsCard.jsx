@@ -13,12 +13,25 @@ const SuggestionsCard = ({ usersData }) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    async (followerData) => {
-      let userData = await crowdServer.post(
+    async () => {
+      await crowdServer.post(
         "/users/addrelation",
         {
           followerId: currentUser.details.idusers,
           followedId: usersData.idusers,
+        },
+        {
+          headers: {
+            authorization: currentUser.token,
+          },
+        }
+      );
+
+      await crowdServer.post(
+        "/chat/createchat",
+        {
+          senderId: currentUser.details.idusers.toString(),
+          receiverId: usersData.idusers.toString(),
         },
         {
           headers: {
@@ -36,7 +49,7 @@ const SuggestionsCard = ({ usersData }) => {
   );
 
   const handleFollow = () => {
-    mutation.mutate(true);
+    mutation.mutate();
   };
 
   return (

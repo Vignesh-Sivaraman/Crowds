@@ -17,6 +17,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { UserContext } from "../../context/userContext";
@@ -59,6 +60,10 @@ const NavbarContainer = () => {
               <NavLinks to="/home/activities">
                 <NotificationsNoneOutlinedIcon />
                 <span className="nav-link">Activity</span>
+              </NavLinks>
+              <NavLinks to="/home/chat">
+                <ChatBubbleOutlineOutlinedIcon />
+                <span className="nav-link">Chat</span>
               </NavLinks>
             </NavContentContainer>
             <NavContentContainer>
