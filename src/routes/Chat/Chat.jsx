@@ -22,7 +22,7 @@ const Chat = () => {
   const [receivedMessage, setReceivedMessage] = useState(null);
   // const OnlineUsers = useRef([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
-  var socket = io("https://crowds.onrender.com");
+  const socket = useRef();
 
   // getting userchat
   const getuserChats = async (req, res) => {
@@ -49,8 +49,9 @@ const Chat = () => {
   // connecting to socket server
   useEffect(() => {
     if (currentUser.details.idusers) {
-      socket.emit("new-user-add", currentUser.details.idusers);
-      socket.on("get-users", (users) => {
+      socket.current = io("https://crowds.onrender.com");
+      socket.current.emit("new-user-add", currentUser.details.idusers);
+      socket.current.on("get-users", (users) => {
         // OnlineUsers.current = users;
         setOnlineUsers(users);
       });
@@ -60,14 +61,14 @@ const Chat = () => {
   // setting send messagefrom socket server
   useEffect(() => {
     if (sendMessage !== null) {
-      socket.emit("send-message", sendMessage);
+      socket.current.emit("send-message", sendMessage);
     }
   }, [sendMessage]);
 
   //receive msg from socket server
 
   useEffect(() => {
-    socket.on("receive-message", (data) => {
+    socket.current.on("receive-message", (data) => {
       setReceivedMessage(data);
     });
   }, []);
